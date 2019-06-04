@@ -1,9 +1,10 @@
 <B>Urban Dictionary app</B>
 
-App to find the meaning/definition of the searched words.
+App to find the meaning/definition of the searched word.
 
 
-Assumptions/Enhancements:
+
+Assumptions/Enhancements :
 
 > Can make more efficent code using caching with databse
 
