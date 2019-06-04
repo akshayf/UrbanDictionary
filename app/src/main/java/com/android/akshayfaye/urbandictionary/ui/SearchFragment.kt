@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.android.akshayfaye.urbandictionary.DictionaryViewModel
+import com.android.akshayfaye.urbandictionary.DictionaryViewModelFactory
 import com.android.akshayfaye.urbandictionary.R
+import com.android.akshayfaye.urbandictionary.utilities.InjectorUtils
 import com.android.akshayfaye.urbandictionary.utilities.setSafeOnClickListener
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import javax.inject.Inject
@@ -21,9 +25,6 @@ import javax.inject.Inject
 class SearchFragment : Fragment() {
 
     private val TAG : String = "SearchFragment"
-
-    @Inject
-    internal lateinit var dictionaryViewModelFactory : DictionaryViewModelFactory
 
     companion object{
 
@@ -44,13 +45,17 @@ class SearchFragment : Fragment() {
             dictionary_search_edit_text.hideKeyboard();
 
             if(validateString(searchString)){
-                val viewModel : DictionaryViewModel = ViewModelProviders.of(requireActivity(), dictionaryViewModelFactory)
+                val factory = InjectorUtils.provideAcronymsViewModelFactory(requireContext())
+                val viewModel : DictionaryViewModel = ViewModelProviders.of(requireActivity(), factory)
                     .get(DictionaryViewModel::class.java)
+
+                requireActivity().progress_bar.visibility = View.VISIBLE
 
                 viewModel.searchDefinitions(searchString)
 
             }else{
                 Snackbar.make(requireView(), getString(R.string.not_valid_word), Snackbar.LENGTH_LONG).show()
+                requireActivity().progress_bar.visibility = View.GONE
             }
         }
 

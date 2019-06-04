@@ -1,4 +1,4 @@
-package com.android.akshayfaye.urbandictionary.ui
+package com.android.akshayfaye.urbandictionary
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -32,8 +32,8 @@ class DefinitionListFragmentTest {
     }
 
     @Test
-    fun testProgressBar() {
-        Espresso.onView(withId(R.id.progress_bar))
+    fun testRecycleView() {
+        Espresso.onView(withId(R.id.dictionary_recycler_view))
             .check(matches(isDisplayed()))
     }
 }

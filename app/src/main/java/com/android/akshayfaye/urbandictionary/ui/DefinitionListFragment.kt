@@ -1,7 +1,6 @@
 package com.android.akshayfaye.urbandictionary.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.akshayfaye.urbandictionary.DefinitionRecyclerAdapter
+import com.android.akshayfaye.urbandictionary.DictionaryViewModel
+import com.android.akshayfaye.urbandictionary.DictionaryViewModelFactory
 import com.android.akshayfaye.urbandictionary.R
 import com.android.akshayfaye.urbandictionary.data.Definitions
+import com.android.akshayfaye.urbandictionary.utilities.InjectorUtils
 import com.google.android.material.snackbar.Snackbar
-import dagger.android.AndroidInjection.inject
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_definition_list.view.*
 import javax.inject.Inject
 
@@ -28,9 +30,6 @@ class DefinitionListFragment : Fragment(), AdapterView.OnItemSelectedListener{
     lateinit var mListadapter : DefinitionRecyclerAdapter
     private lateinit var fragmentView : View
     var definitionList: MutableList<Definitions> = mutableListOf()
-
-    @Inject
-    lateinit var dictionaryViewModelFactory : DictionaryViewModelFactory
 
     companion object {
 
@@ -51,7 +50,8 @@ class DefinitionListFragment : Fragment(), AdapterView.OnItemSelectedListener{
 
         setRecyclerViewHeight();
 
-        val viewModel : DictionaryViewModel = ViewModelProviders.of(requireActivity(), dictionaryViewModelFactory)
+        val factory = InjectorUtils.provideAcronymsViewModelFactory(requireContext())
+        val viewModel : DictionaryViewModel = ViewModelProviders.of(requireActivity(), factory)
             .get(DictionaryViewModel::class.java)
 
         //fragmentView.definition_text_view.text = resources.getString(R.string.definition_for, it)
@@ -59,7 +59,6 @@ class DefinitionListFragment : Fragment(), AdapterView.OnItemSelectedListener{
         //Observing for definitionList on service call
         viewModel.mData.observe(this, Observer {
 
-            fragmentView.progress_bar.visibility = View.VISIBLE
             switchVisibility(false)
 
             if(it != null) {
@@ -68,7 +67,7 @@ class DefinitionListFragment : Fragment(), AdapterView.OnItemSelectedListener{
             }else {
                 Snackbar.make(requireView(), getString(R.string.no_data_for_definition),
                         Snackbar.LENGTH_LONG).show()
-                fragmentView.progress_bar.visibility = View.GONE
+                requireActivity().progress_bar.visibility = View.GONE
             }
         })
 
@@ -79,7 +78,7 @@ class DefinitionListFragment : Fragment(), AdapterView.OnItemSelectedListener{
      * Method to update Views on service response
      */
     private fun updateViews(){
-        fragmentView.progress_bar.visibility = View.GONE
+        requireActivity().progress_bar.visibility = View.GONE
         if(definitionList.isNotEmpty()){
 
             switchVisibility(true)

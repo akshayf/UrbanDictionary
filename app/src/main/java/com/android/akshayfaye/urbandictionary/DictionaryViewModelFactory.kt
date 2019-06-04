@@ -1,4 +1,4 @@
-package com.android.akshayfaye.urbandictionary.ui
+package com.android.akshayfaye.urbandictionary
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

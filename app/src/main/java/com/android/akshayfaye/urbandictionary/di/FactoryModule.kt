@@ -2,8 +2,7 @@ package com.android.akshayfaye.urbandictionary.di
 
 import com.android.akshayfaye.urbandictionary.data.DictionaryRepository
 import com.android.akshayfaye.urbandictionary.network.ApiService
-import com.android.akshayfaye.urbandictionary.ui.DictionaryViewModel
-import com.android.akshayfaye.urbandictionary.ui.DictionaryViewModelFactory
+import com.android.akshayfaye.urbandictionary.DictionaryViewModelFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

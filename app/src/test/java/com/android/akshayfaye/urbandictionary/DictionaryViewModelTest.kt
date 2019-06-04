@@ -1,15 +1,11 @@
 package com.android.akshayfaye.urbandictionary
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.akshayfaye.urbandictionary.data.Definitions
 import com.android.akshayfaye.urbandictionary.data.Dictionary
 import com.android.akshayfaye.urbandictionary.data.DictionaryRepository
-import com.android.akshayfaye.urbandictionary.ui.DictionaryViewModel
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

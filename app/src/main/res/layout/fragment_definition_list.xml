@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/sort_by_text_view"
             android:text="@string/sort_by"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -23,7 +23,7 @@
             android:id="@+id/thump_sort_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             android:prompt="@string/spinner_title"
             app:layout_constraintBottom_toBottomOf="@+id/sort_by_text_view"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -37,24 +37,9 @@
             android:layout_marginBottom="30dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:padding="2dp"
             app:layout_constraintTop_toBottomOf="@+id/sort_by_text_view"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:id="@+id/progress_bar"
-            android:minHeight="50dp"
-            android:visibility="gone"
-            android:minWidth="200dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
