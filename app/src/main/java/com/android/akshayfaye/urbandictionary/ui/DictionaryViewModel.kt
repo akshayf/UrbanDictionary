@@ -1,7 +1,10 @@
 package com.android.akshayfaye.urbandictionary.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.android.akshayfaye.urbandictionary.data.Dictionary
 import com.android.akshayfaye.urbandictionary.data.DictionaryRepository
 
 /**
@@ -10,12 +13,17 @@ import com.android.akshayfaye.urbandictionary.data.DictionaryRepository
  */
 class DictionaryViewModel(private val repository: DictionaryRepository) : ViewModel(){
 
-    fun getDefinition(searchString: String)  = repository.getDefinition(searchString)
+    var mData : LiveData<Dictionary>
 
-    val searchStringData = MutableLiveData<String>()
+    private val query = MutableLiveData<String>()
 
-    fun setSearchString(searchString: String) {
-        searchStringData.value = searchString
+    init {
+        mData =  Transformations.switchMap(
+                query,
+                ::findDefinitions
+        )
     }
+    fun searchDefinitions(queryString: String) = apply { query.value = queryString }
 
+    fun findDefinitions(query: String) =  repository.getDefinition(query)
 }

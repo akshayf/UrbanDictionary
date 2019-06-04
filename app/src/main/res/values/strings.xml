@@ -4,12 +4,12 @@
     <string name="definition_for">Definitions for: %1$s</string>
     <string name="sort_by">Sort By:</string>
     <string name="search_dictionary">Search</string>
-    <string name="not_valid_word">Not a valid Word</string>
-    <string name="no_data_for_definition">No data for Definition</string>
+    <string name="not_valid_word">Not a valid word</string>
+    <string name="no_data_for_definition">No data for searched word</string>
     <string name="spinner_title">Sort by Thump</string>
 
     <string-array name="thump_array">
-        <item>Select Thump</item>
+        <item>Select your Thump</item>
         <item>Thumps Up</item>
         <item>Thumps Down</item>
     </string-array>

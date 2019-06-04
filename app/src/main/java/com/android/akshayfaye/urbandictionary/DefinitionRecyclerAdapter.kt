@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.akshayfaye.urbandictionary.data.Definitions
 import kotlinx.android.synthetic.main.definition_details.view.*
+import java.util.*
+import kotlin.Comparator
 
 /**
  * DefinitionRecyclerAdapter provide a binding from an app-specific data set to views
@@ -31,6 +33,7 @@ class DefinitionRecyclerAdapter(private val context: Context) : RecyclerView.Ada
      */
     fun setDefinition(definitionList: List<Definitions>) {
         this.definitionList = definitionList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +42,25 @@ class DefinitionRecyclerAdapter(private val context: Context) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setData(definitionList.get(position));
+    }
+
+    /**
+     * Method for sorting the definition list elements according to thumpsUp & thumpsDown
+     */
+     fun sortByThump(position: Int){
+
+        Collections.sort(definitionList, object : Comparator<Definitions> {
+            override fun compare(def1: Definitions, def2: Definitions): Int {
+
+                if(position != 1)
+                    return Integer.valueOf(def1.thumbsUp).compareTo(def2.thumbsUp)
+                else if(position != 2)
+                    return Integer.valueOf(def2.thumbsUp).compareTo(def1.thumbsUp)
+
+                return Integer.valueOf(def1.thumbsUp).compareTo(def2.thumbsUp)
+            }
+        })
+        notifyDataSetChanged()
     }
 
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view){

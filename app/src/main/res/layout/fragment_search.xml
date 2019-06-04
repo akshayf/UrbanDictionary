@@ -17,6 +17,7 @@
             android:padding="5dp"
             android:maxLength="20"
             android:hint="@string/search_hint"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:inputType="textAutoCorrect"
             android:autofillHints="@string/search_hint"
             app:layout_constraintTop_toTopOf="parent"

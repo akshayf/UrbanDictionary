@@ -9,11 +9,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.android.akshayfaye.urbandictionary.R
-import com.android.akshayfaye.urbandictionary.utilities.InjectorUtils
 import com.android.akshayfaye.urbandictionary.utilities.setSafeOnClickListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import javax.inject.Inject
 
 /**
  * SearchFragment provides search view for searching word definition
@@ -21,6 +21,9 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 class SearchFragment : Fragment() {
 
     private val TAG : String = "SearchFragment"
+
+    @Inject
+    internal lateinit var dictionaryViewModelFactory : DictionaryViewModelFactory
 
     companion object{
 
@@ -41,12 +44,10 @@ class SearchFragment : Fragment() {
             dictionary_search_edit_text.hideKeyboard();
 
             if(validateString(searchString)){
-                val factory = InjectorUtils.provideAcronymsViewModelFactory(requireContext())
-                val viewModel : DictionaryViewModel = ViewModelProviders.of(requireActivity(), factory)
+                val viewModel : DictionaryViewModel = ViewModelProviders.of(requireActivity(), dictionaryViewModelFactory)
                     .get(DictionaryViewModel::class.java)
 
-                //sets search string for observing it in DefinitionListFragment fragment
-                viewModel.setSearchString(searchString)
+                viewModel.searchDefinitions(searchString)
 
             }else{
                 Snackbar.make(requireView(), getString(R.string.not_valid_word), Snackbar.LENGTH_LONG).show()
